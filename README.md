@@ -76,7 +76,7 @@ Users post simple help requests as “quests,” while others browse, accept, an
 
 ## Project Status
 
-🚧 **Pitch & Concept Demo**
+**Pitch & Concept Demo**
 This site represents a product idea and presentation, not a production-ready application.
 
 ---
