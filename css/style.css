@@ -1,0 +1,13 @@
+@import url("components/cards.css");
+@import url("components/wrappers.css");
+@import url("components/buttons.css");
+
+.bdy-background-color {
+  background-color: #14213D;
+  color: #E5E5E5;
+}
+
+.grid-of-contents {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
