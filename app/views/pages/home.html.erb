@@ -1,2 +1,141 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# ─── HERO ─────────────────────────────────────────────────────────────── %>
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <p class="hero-eyebrow">Community · Connection · Care</p>
+        <h1 class="hero-title">
+          Neighbors helping<br>
+          neighbors <span class="hero-accent">earn</span>.
+        </h1>
+        <p class="hero-subtitle">
+          Guild connects older adults who need a hand with younger community
+          members ready to help — and earn yen for their time.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <%= link_to new_user_registration_path, class: "btn btn-mustard btn-lg" do %>
+            <i class="fa-solid fa-user-plus me-2"></i>Join the Guild
+          <% end %>
+          <%= link_to quests_path, class: "btn btn-outline-light btn-lg" do %>
+            <i class="fa-solid fa-scroll me-2"></i>Browse Quests
+          <% end %>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+        <div class="hero-emblem">
+          <i class="fa-solid fa-handshake-angle hero-emblem-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ─── HOW IT WORKS ───────────────────────────────────────────────────────── %>
+<section class="how-section py-6">
+  <div class="container">
+    <h2 class="section-title text-center">How it works</h2>
+    <p class="section-subtitle text-center">
+      Three simple steps from request to reward.
+    </p>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4">
+        <div class="step-card text-center p-4 h-100">
+          <div class="step-icon-wrap mb-3">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <h3 class="step-title">Post a Quest</h3>
+          <p class="step-body text-muted">
+            Describe the task, set a reward in yen, and post it to the community.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card text-center p-4 h-100">
+          <div class="step-icon-wrap mb-3">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <h3 class="step-title">Get Matched</h3>
+          <p class="step-body text-muted">
+            A community member accepts your quest and takes care of it for you.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card text-center p-4 h-100">
+          <div class="step-icon-wrap mb-3">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h3 class="step-title">Complete &amp; Reward</h3>
+          <p class="step-body text-muted">
+            Mark it done, leave a review, and release the yen reward.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ─── FOR YOU ─────────────────────────────────────────────────────────────── %>
+<section class="for-you-section py-6">
+  <div class="container">
+    <h2 class="section-title text-center">Who is Guild for?</h2>
+    <p class="section-subtitle text-center">Whether you need help or want to give it, there's a place for you.</p>
+    <div class="row g-4 mt-2">
+
+      <%# Quest Giver card %>
+      <div class="col-md-6">
+        <div class="for-you-card for-you-giver p-5 h-100">
+          <div class="for-you-icon mb-4">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h3 class="fw-bold fs-4 mb-3">I need help</h3>
+          <p class="mb-4 text-muted">
+            Post tasks you'd like done and get reliable help from caring community members nearby.
+          </p>
+          <ul class="benefit-list mb-4">
+            <li><i class="fa-solid fa-check-circle me-2"></i>Grocery runs &amp; errands</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Tech support &amp; setup</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Home &amp; garden tasks</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Companionship &amp; conversation</li>
+          </ul>
+          <%= link_to "Post Your First Quest", new_user_registration_path, class: "btn btn-imperial" %>
+        </div>
+      </div>
+
+      <%# Quest Accepter card %>
+      <div class="col-md-6">
+        <div class="for-you-card for-you-accepter p-5 h-100">
+          <div class="for-you-icon mb-4">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="fw-bold fs-4 mb-3">I want to help</h3>
+          <p class="mb-4 text-muted">
+            Browse local quests, lend your skills, and earn yen while building real connections.
+          </p>
+          <ul class="benefit-list mb-4">
+            <li><i class="fa-solid fa-check-circle me-2"></i>Flexible, local opportunities</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Earn yen for your time</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Build meaningful relationships</li>
+            <li><i class="fa-solid fa-check-circle me-2"></i>Make a real difference</li>
+          </ul>
+          <%= link_to "Start Accepting Quests", new_user_registration_path, class: "btn btn-mustard" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<%# ─── FINAL CTA ───────────────────────────────────────────────────────────── %>
+<section class="cta-section py-6">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">Ready to join the Guild?</h2>
+    <p class="text-muted lead mb-4">
+      Become part of a community that looks out for each other.
+    </p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <%= link_to "Create an Account", new_user_registration_path, class: "btn btn-imperial btn-lg" %>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-secondary btn-lg" %>
+    </div>
+  </div>
+</section>

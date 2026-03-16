@@ -1,1 +1,208 @@
-// Specific CSS for your home-page
+// ─── Spacing helper ────────────────────────────────────────────────────────
+.py-6 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+// ─── Shared section typography ─────────────────────────────────────────────
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: $imperial-blue;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// ─── Hero ───────────────────────────────────────────────────────────────────
+.hero-section {
+  background: $imperial-blue;
+  color: white;
+  padding: 90px 0 100px;
+
+  @media (max-width: 767px) {
+    padding: 60px 0 70px;
+  }
+}
+
+.hero-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba($mustard, 0.85);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-size: 3.75rem;
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 767px) {
+    font-size: 2.5rem;
+  }
+}
+
+.hero-accent {
+  color: $mustard;
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 500px;
+}
+
+.hero-emblem {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(white, 0.06);
+  border: 2px solid rgba($mustard, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-emblem-icon {
+  font-size: 7.5rem;
+  color: $mustard;
+  opacity: 0.9;
+}
+
+// ─── Buttons ────────────────────────────────────────────────────────────────
+.btn-mustard {
+  background-color: $mustard;
+  color: $imperial-blue;
+  border: none;
+  font-weight: 700;
+
+  &:hover,
+  &:focus {
+    background-color: $bright-amber;
+    color: $imperial-blue;
+  }
+}
+
+.btn-imperial {
+  background-color: $imperial-blue;
+  color: white;
+  border: none;
+  font-weight: 600;
+
+  &:hover,
+  &:focus {
+    background-color: $steel-azure;
+    color: white;
+  }
+}
+
+// ─── How it works ────────────────────────────────────────────────────────────
+.how-section {
+  background: white;
+}
+
+.step-card {
+  background: $light-gray;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba($imperial-blue, 0.1);
+  }
+}
+
+.step-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba($imperial-blue, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  i {
+    font-size: 1.75rem;
+    color: $imperial-blue;
+  }
+}
+
+.step-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $imperial-blue;
+  margin-bottom: 0.5rem;
+}
+
+.step-body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+// ─── For You ─────────────────────────────────────────────────────────────────
+.for-you-section {
+  background: $light-gray;
+}
+
+.for-you-card {
+  border-radius: 16px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba($imperial-blue, 0.1);
+  }
+}
+
+.for-you-giver {
+  background: rgba($imperial-blue, 0.05);
+  border-color: rgba($imperial-blue, 0.15);
+
+  .for-you-icon i {
+    font-size: 2.5rem;
+    color: $imperial-blue;
+  }
+}
+
+.for-you-accepter {
+  background: rgba($mustard, 0.12);
+  border-color: rgba($mustard, 0.5);
+
+  .for-you-icon i {
+    font-size: 2.5rem;
+    color: $imperial-blue;
+  }
+}
+
+.benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 5px 0;
+    font-size: 0.95rem;
+    color: #495057;
+
+    i {
+      color: $steel-azure;
+    }
+  }
+}
+
+// ─── Final CTA ───────────────────────────────────────────────────────────────
+.cta-section {
+  background: white;
+}

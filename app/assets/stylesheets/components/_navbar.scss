@@ -1,12 +1,101 @@
-.navbar-lewagon {
+.navbar-guild {
+  background-color: #0d1b3e;
+  border-bottom: 3px solid $mustard;
   justify-content: space-between;
-  background: white;
-}
+  min-height: 56px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+  .navbar-brand {
+    color: $mustard;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+    i {
+      color: $mustard;
+    }
+
+    &:hover,
+    &:focus {
+      color: darken($mustard, 8%);
+    }
+  }
+
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+      color: $mustard;
+    }
+
+    &.dropdown-toggle {
+      gap: 0.5rem;
+    }
+  }
+
+  // Hamburger toggler styled for dark navbar
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.4);
+    padding: 0.375rem 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($mustard, 0.5);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C 255%2C 255%2C 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+
+  // Dropdown menu
+  .dropdown-menu {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    margin-top: 0.25rem;
+    min-width: 180px;
+
+    .dropdown-item {
+      color: $imperial-blue;
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+
+      &:hover,
+      &:focus {
+        background-color: $light-gray;
+        color: $imperial-blue;
+      }
+
+      &.text-danger {
+        color: #dc3545 !important;
+
+        &:hover,
+        &:focus {
+          background-color: #fff5f5;
+        }
+      }
+    }
+
+    .dropdown-divider {
+      border-color: $platinum;
+      margin: 0.25rem 0;
+    }
+  }
 }
