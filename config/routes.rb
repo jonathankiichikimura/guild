@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :quests, only: [:index, :show, :new, :create, :update, :destroy] do
-    resources :quest_acceptances, only: [:create, :destroy]
     resources :reviews, only: [:new, :create]
   end
 
