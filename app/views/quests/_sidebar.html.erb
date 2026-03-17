@@ -1,0 +1,36 @@
+<%# Quests sidebar — shared by index and show pages.
+    Locals:
+      active_link (optional Symbol): :index or :show — highlights the active nav link %>
+
+<aside class="col-12 col-md-3 col-lg-2 quests-sidebar mb-4 mb-md-0">
+  <div class="quests-sidebar__inner d-flex flex-md-column align-items-center align-items-md-start gap-3 pt-2">
+
+    <%# Current user avatar — initials-based placeholder %>
+    <% display_name = [current_user.first_name, current_user.last_name].select(&:present?).join(" ") %>
+    <% display_name = current_user.email.split("@").first if display_name.blank? %>
+    <% initials = display_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
+    <div class="quests-sidebar__avatar-wrap text-center w-100">
+      <div class="quests-sidebar__avatar-placeholder rounded-circle d-flex align-items-center justify-content-center mx-auto" aria-label="Your avatar — <%= display_name %>">
+        <span class="quests-sidebar__avatar-initials"><%= initials %></span>
+      </div>
+      <p class="quests-sidebar__username mt-2 mb-0 fw-semibold text-truncate"><%= display_name %></p>
+    </div>
+
+    <%# Divider %>
+    <hr class="quests-sidebar__divider w-100 d-none d-md-block">
+
+    <%# Navigation %>
+    <nav class="quests-sidebar__nav d-none d-md-flex flex-column gap-2 w-100" aria-label="Quest filters">
+      <span class="quests-sidebar__nav-label text-uppercase fw-bold">Browse</span>
+      <a href="<%= quests_path %>" class="quests-sidebar__nav-link <%= 'active' if local_assigns[:active_link] == :index %>" <%= 'aria-current="page"' if local_assigns[:active_link] == :index %>>
+        <i class="fa-solid fa-list me-2" aria-hidden="true"></i>All Quests
+      </a>
+      <% if user_signed_in? %>
+        <a href="<%= new_quest_path %>" class="quests-sidebar__nav-link quests-sidebar__nav-link--cta">
+          <i class="fa-solid fa-circle-plus me-2" aria-hidden="true"></i>Post a Quest
+        </a>
+      <% end %>
+    </nav>
+
+  </div>
+</aside>

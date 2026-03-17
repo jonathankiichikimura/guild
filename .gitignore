@@ -47,3 +47,8 @@ CLAUDE.md
 # Playwright screenshots
 before_*.png
 after_*.png
+
+# Node (Playwright dev dependency — not part of the importmap JS stack)
+node_modules/
+package.json
+package-lock.json
