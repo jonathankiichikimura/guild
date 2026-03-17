@@ -431,17 +431,11 @@
   border-radius: 10px;
   border: 1px solid $platinum;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  min-height: 320px;
+  min-height: 200px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  // On mobile the right col stacks below — give it a fixed height instead
-  @media (max-width: 991.98px) {
-    min-height: 200px;
-    height: auto;
-  }
 }
 
 .quest-show__map-placeholder-inner {

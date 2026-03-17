@@ -24,11 +24,6 @@
 .hero-section {
   background: $imperial-blue;
   color: white;
-  padding: 90px 0 100px;
-
-  @media (max-width: 767px) {
-    padding: 60px 0 70px;
-  }
 }
 
 .hero-eyebrow {
@@ -41,14 +36,10 @@
 }
 
 .hero-title {
-  font-size: 3.75rem;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
   font-weight: 900;
   line-height: 1.08;
   margin-bottom: 1.5rem;
-
-  @media (max-width: 767px) {
-    font-size: 2.5rem;
-  }
 }
 
 .hero-accent {
