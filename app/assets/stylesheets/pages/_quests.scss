@@ -277,6 +277,220 @@
   }
 }
 
+// ─── Quest show page ──────────────────────────────────────────────────────────
+
+.quest-show {
+
+  &__back-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $steel-azure;
+    text-decoration: none;
+    min-height: 44px;
+    padding: 0.25rem 0;
+    transition: color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      color: $imperial-blue;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $imperial-blue;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: $imperial-blue;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  &__panel {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid $platinum;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  &__panel-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6c757d;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $platinum;
+
+    i {
+      color: $steel-azure;
+    }
+  }
+
+  &__description-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #343a40;
+
+    p {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Metadata definition list
+
+  &__meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid $platinum;
+
+    &--last {
+      border-bottom: none;
+    }
+  }
+
+  &__meta-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #6c757d;
+    flex-shrink: 0;
+    margin-bottom: 0;
+
+    i {
+      color: $steel-azure;
+    }
+  }
+
+  &__meta-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $imperial-blue;
+    text-align: right;
+    margin-bottom: 0;
+  }
+
+  &__reward-amount {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: $imperial-blue;
+  }
+
+  &__reward-unit {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  // Quest giver card
+
+  &__giver-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  &__giver-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $imperial-blue;
+  }
+
+  &__giver-bio {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #6c757d;
+  }
+}
+
+// ─── Map placeholder ──────────────────────────────────────────────────────────
+
+.quest-show__map-placeholder {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  border: 1px solid $platinum;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  min-height: 320px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // On mobile the right col stacks below — give it a fixed height instead
+  @media (max-width: 991.98px) {
+    min-height: 200px;
+    height: auto;
+  }
+}
+
+.quest-show__map-placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.quest-show__map-placeholder-icon {
+  font-size: 2.75rem;
+  color: #adb5bd;
+}
+
+.quest-show__map-placeholder-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #adb5bd;
+}
+
+// ─── Accept button ────────────────────────────────────────────────────────────
+
+.btn-accept {
+  background-color: $green;
+  color: white;
+  border: none;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  min-height: 44px;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background-color: darken($green, 8%);
+    color: white;
+    box-shadow: 0 4px 12px rgba($green, 0.35);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $imperial-blue;
+    outline-offset: 3px;
+  }
+}
+
 // ─── Reduced motion ───────────────────────────────────────────────────────────
 
 @media (prefers-reduced-motion: reduce) {

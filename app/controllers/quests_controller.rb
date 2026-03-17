@@ -1,6 +1,6 @@
 class QuestsController < ApplicationController
   def index
-    @quests = Quest.all.select { |quest| quest.status == "open" }
+    @quests = Quest.where(status: "open")
   end
 
   def show

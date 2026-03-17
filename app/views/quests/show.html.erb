@@ -1,2 +1,166 @@
-<h1>Quests#show</h1>
-<p>Find me in app/views/quests/show.html.erb</p>
+<% content_for :title, "#{@quest.title} — Guild" %>
+
+<div class="quests-page container-fluid py-4 px-4 px-md-5">
+  <div class="row gx-4">
+
+    <%# ── Left sidebar ──────────────────────────────────────────────────────── %>
+    <%= render "quests/sidebar" %>
+
+    <%# ── Main content ───────────────────────────────────────────────────────── %>
+    <main class="col-12 col-md-9 col-lg-10" id="main-content">
+
+      <%# ── Back link ──────────────────────────────────────────────────────── %>
+      <div class="mb-3">
+        <%= link_to quests_path, class: "quest-show__back-link" do %>
+          <i class="fa-solid fa-arrow-left me-1" aria-hidden="true"></i>Back to Quests
+        <% end %>
+      </div>
+
+      <%# ── Header card ─────────────────────────────────────────────────────── %>
+      <div class="index-info-container mb-4 p-4 d-flex flex-column flex-sm-row align-items-sm-start justify-content-between gap-3">
+        <div class="flex-grow-1 min-width-0">
+          <%# Status + category badges %>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="quest-card__status quest-card__status--<%= @quest.status %>" role="status">
+              <%= @quest.status.humanize %>
+            </span>
+            <% if @quest.category.present? %>
+              <span class="quest-card__category">
+                <i class="fa-solid fa-tag me-1" aria-hidden="true"></i><%= @quest.category.humanize %>
+              </span>
+            <% end %>
+          </div>
+
+          <%# Quest title %>
+          <h1 class="quest-show__title mb-0"><%= @quest.title %></h1>
+        </div>
+
+        <%# Accept button — shown only if quest is open and current user is not the quest giver %>
+        <% if @quest.status == "open" && current_user != @quest.quest_giver %>
+          <div class="flex-shrink-0">
+            <button class="btn btn-accept btn-lg" type="button" aria-label="Accept this quest: <%= @quest.title %>">
+              <i class="fa-solid fa-handshake me-2" aria-hidden="true"></i>Accept Quest
+            </button>
+          </div>
+        <% end %>
+      </div>
+
+      <%# ── Body section ────────────────────────────────────────────────────── %>
+      <div class="row gx-4">
+
+        <%# Center column: description + metadata + posted by (~70%) %>
+        <div class="col-12 col-lg-8 d-flex flex-column gap-4 mb-4 mb-lg-0">
+
+          <%# Quest description %>
+          <div class="quest-show__panel">
+            <h2 class="quest-show__panel-heading">
+              <i class="fa-solid fa-scroll me-2" aria-hidden="true"></i>Quest Details
+            </h2>
+            <div class="quest-show__description">
+              <%= simple_format(@quest.description, class: "quest-show__description-text") %>
+            </div>
+          </div>
+
+          <%# Quest metadata %>
+          <div class="quest-show__panel">
+            <h2 class="quest-show__panel-heading">
+              <i class="fa-solid fa-circle-info me-2" aria-hidden="true"></i>Quest Info
+            </h2>
+
+            <dl class="quest-show__meta-list mb-0">
+
+              <%# Reward %>
+              <div class="quest-show__meta-item">
+                <dt class="quest-show__meta-label">
+                  <i class="fa-solid fa-yen-sign me-1" aria-hidden="true"></i>Reward
+                </dt>
+                <dd class="quest-show__meta-value" aria-label="Reward: <%= number_to_currency(@quest.reward, unit: '¥', precision: 0, format: '%u%n') %>">
+                  <span class="quest-show__reward-amount"><%= number_with_delimiter(@quest.reward) %></span>
+                  <span class="quest-show__reward-unit ms-1">¥</span>
+                </dd>
+              </div>
+
+              <%# Deadline %>
+              <% if @quest.due_date.present? %>
+                <div class="quest-show__meta-item">
+                  <dt class="quest-show__meta-label">
+                    <i class="fa-regular fa-calendar me-1" aria-hidden="true"></i>Deadline
+                  </dt>
+                  <dd class="quest-show__meta-value">
+                    <%= @quest.due_date.strftime("%B %-d, %Y") %>
+                  </dd>
+                </div>
+              <% end %>
+
+              <%# Location %>
+              <% if @quest.location.present? %>
+                <div class="quest-show__meta-item">
+                  <dt class="quest-show__meta-label">
+                    <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>Location
+                  </dt>
+                  <dd class="quest-show__meta-value"><%= @quest.location %></dd>
+                </div>
+              <% end %>
+
+              <%# Category %>
+              <% if @quest.category.present? %>
+                <div class="quest-show__meta-item">
+                  <dt class="quest-show__meta-label">
+                    <i class="fa-solid fa-tag me-1" aria-hidden="true"></i>Category
+                  </dt>
+                  <dd class="quest-show__meta-value"><%= @quest.category.humanize %></dd>
+                </div>
+              <% end %>
+
+              <%# Posted date %>
+              <div class="quest-show__meta-item quest-show__meta-item--last">
+                <dt class="quest-show__meta-label">
+                  <i class="fa-regular fa-clock me-1" aria-hidden="true"></i>Posted
+                </dt>
+                <dd class="quest-show__meta-value"><%= @quest.created_at.strftime("%B %-d, %Y") %></dd>
+              </div>
+
+            </dl>
+          </div>
+
+          <%# Quest giver info %>
+          <div class="quest-show__panel">
+            <h2 class="quest-show__panel-heading">
+              <i class="fa-solid fa-user me-2" aria-hidden="true"></i>Posted By
+            </h2>
+
+            <% giver = @quest.quest_giver %>
+            <% giver_name = [giver.first_name, giver.last_name].select(&:present?).join(" ") %>
+            <% giver_name = giver.email.split("@").first if giver_name.blank? %>
+            <% giver_initials = giver_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
+
+            <div class="d-flex align-items-center gap-3">
+              <div class="quests-sidebar__avatar-placeholder rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 quest-show__giver-avatar" aria-hidden="true">
+                <span class="quests-sidebar__avatar-initials"><%= giver_initials %></span>
+              </div>
+              <div class="min-width-0">
+                <p class="quest-show__giver-name mb-0"><%= giver_name %></p>
+                <% if giver.bio.present? %>
+                  <p class="quest-show__giver-bio mt-1 mb-0"><%= truncate(giver.bio, length: 100) %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div><%# end center column %>
+
+        <%# Right column: map placeholder (~30%) %>
+        <div class="col-12 col-lg-4">
+          <div class="quest-show__map-placeholder" role="img" aria-label="Map placeholder — Mapbox integration coming soon">
+            <div class="quest-show__map-placeholder-inner">
+              <i class="fa-solid fa-map-location-dot quest-show__map-placeholder-icon" aria-hidden="true"></i>
+              <p class="quest-show__map-placeholder-label mb-0">Map coming soon</p>
+            </div>
+          </div>
+        </div><%# end right column %>
+
+      </div><%# end body row %>
+
+    </main>
+  </div>
+</div>
