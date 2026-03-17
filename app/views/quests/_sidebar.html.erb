@@ -1,6 +1,8 @@
-<%# Quests sidebar — shared by index and show pages.
-    Locals:
-      active_link (optional Symbol): :index or :show — highlights the active nav link %>
+<%
+  # Quests sidebar — shared by index and show pages.
+  #  Locals:
+  # active_link (optional Symbol): :index or :show — highlights the active nav link
+%>
 
 <aside class="col-12 col-md-3 col-lg-2 quests-sidebar mb-4 mb-md-0">
   <div class="quests-sidebar__inner d-flex flex-md-column align-items-center align-items-md-start gap-3 pt-2">
@@ -10,10 +12,14 @@
     <% display_name = current_user.email.split("@").first if display_name.blank? %>
     <% initials = display_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
     <div class="quests-sidebar__avatar-wrap text-center w-100">
+      <%= link_to user_path(current_user), class: "text-decoration-none d-inline-block quests-sidebar__avatar-link" do %>
       <div class="quests-sidebar__avatar-placeholder rounded-circle d-flex align-items-center justify-content-center mx-auto" aria-label="Your avatar — <%= display_name %>">
         <span class="quests-sidebar__avatar-initials"><%= initials %></span>
       </div>
-      <p class="quests-sidebar__username mt-2 mb-0 fw-semibold text-truncate"><%= display_name %></p>
+      <% end %>
+      <p class="quests-sidebar__username mt-2 mb-0 fw-semibold text-truncate">
+        <%= link_to display_name, user_path(current_user), class: "text-decoration-none text-reset" %>
+      </p>
     </div>
 
     <%# Divider %>

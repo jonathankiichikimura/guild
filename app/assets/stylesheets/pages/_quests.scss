@@ -17,6 +17,10 @@
     padding-top: 0.5rem;
   }
 
+  &__avatar-link {
+    clip-path: circle(50%);
+  }
+
   &__avatar {
     width: 80px;
     height: 80px;
