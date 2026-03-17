@@ -1,7 +1,6 @@
 class Quest < ApplicationRecord
-  belongs_to :user
-  has_many :quest_acceptances
-  has_many :accepters, through: :quest_acceptances, source: :user
+  belongs_to :quest_giver, class_name: "User"
+  belongs_to :quest_accepter, class_name: "User", optional: true
   has_many :reviews
 
   STATUSES = %w[open in_progress completed].freeze
