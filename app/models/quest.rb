@@ -1,7 +1,8 @@
 class Quest < ApplicationRecord
-  belongs_to :quest_giver, class_name: "User"
-  belongs_to :quest_accepter, class_name: "User", optional: true
-  has_many :reviews
+  belongs_to :giver
+  belongs_to :accepter, optional: true
+  has_many :reviews, dependent: :destroy
+  has_many :quest_applications, dependent: :destroy
 
   STATUSES = %w[open in_progress completed].freeze
   CATEGORIES = %w[groceries gardening tech_help transport household other].freeze
