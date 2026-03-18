@@ -16,24 +16,25 @@
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center">
-        <% if user_signed_in? %>
+        <% if accepter_signed_in? || giver_signed_in? %>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa-solid fa-circle-user fa-lg"></i>
-              <span class="d-none d-sm-inline"><%= current_user.first_name %></span>
+              <span class="d-none d-sm-inline"><%= current_giver.first_name || current_accepter.first_name %></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %>
+                <%= link_to "My Profile", giver_signed_in? ? giver_path(current_giver) : accepter_path(current_accepter), class: "dropdown-item" %>
               <hr class="dropdown-divider">
-              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
+                <%= link_to "Log out", giver_signed_in? ? destroy_giver_session_path : destroy_accepter_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+            <%# Will handle case where new user is actually an accepter rather than a giver. Default to giver%>
+            <%= link_to "Sign In", new_giver_session_path, class: "nav-link" %>
           </li>
           <li class="nav-item ms-2">
-            <%= link_to "Join Guild", new_user_registration_path, class: "btn btn-mustard btn-sm" %>
+            <%= link_to "Join Guild", new_giver_registration_path, class: "btn btn-mustard btn-sm" %>
           </li>
         <% end %>
       </ul>
