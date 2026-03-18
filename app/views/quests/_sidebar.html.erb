@@ -8,9 +8,8 @@
   <div class="quests-sidebar__inner d-flex flex-md-column align-items-center align-items-md-start gap-3 pt-2">
 
     <%# Current user avatar — initials-based placeholder %>
-    <% display_name = [current_user.first_name, current_user.last_name].select(&:present?).join(" ") %>
     <% current_user = giver_signed_in? ? current_giver : current_accepter %>
-    <% display_name = current_user.email.split("@").first if current_user.display_name.blank? %>
+    <% display_name = current_user.display_name %>
     <% initials = display_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
     <div class="quests-sidebar__avatar-wrap text-center w-100">
       <%= link_to giver_signed_in? ? giver_path(current_giver) : accepter_path(current_accepter), class: "text-decoration-none d-inline-block quests-sidebar__avatar-link" do %>
