@@ -13,8 +13,10 @@
           members ready to help — and earn yen for their time.
         </p>
         <div class="d-flex gap-3 flex-wrap mt-4">
-          <%= link_to new_user_registration_path, class: "btn btn-mustard btn-lg" do %>
-            <i class="fa-solid fa-user-plus me-2"></i>Join the Guild
+          <% if current_user.nil? %>
+            <%= link_to new_user_registration_path, class: "btn btn-mustard btn-lg" do %>
+              <i class="fa-solid fa-user-plus me-2"></i>Join the Guild
+            <% end %>
           <% end %>
           <%= link_to quests_path, class: "btn btn-outline-light btn-lg" do %>
             <i class="fa-solid fa-scroll me-2"></i>Browse Quests
