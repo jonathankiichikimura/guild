@@ -20,7 +20,7 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle d-flex align-items-center gap-2" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa-solid fa-circle-user fa-lg"></i>
-              <span class="d-none d-sm-inline"><%= current_giver.first_name || current_accepter.first_name %></span>
+              <span class="d-none d-sm-inline"><%= giver_signed_in? ? current_giver.first_name : current_accepter.full_name %></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <%= link_to "My Profile", giver_signed_in? ? giver_path(current_giver) : accepter_path(current_accepter), class: "dropdown-item" %>

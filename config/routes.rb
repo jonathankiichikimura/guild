@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :givers
-  devise_for :accepters
+  devise_for :givers,    controllers: { registrations: "givers/registrations" }
+  devise_for :accepters, controllers: { registrations: "accepters/registrations" }
+
 
   root to: "pages#home"
 
