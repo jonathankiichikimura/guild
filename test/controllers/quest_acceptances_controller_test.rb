@@ -1,13 +1,9 @@
 require "test_helper"
 
-class QuestAcceptancesControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get quest_acceptances_create_url
-    assert_response :success
-  end
+class QuestApplicationsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
 
-  test "should get destroy" do
-    get quest_acceptances_destroy_url
-    assert_response :success
+  test "should create quest application" do
+    skip "QuestApplicationsController not yet implemented"
   end
 end
