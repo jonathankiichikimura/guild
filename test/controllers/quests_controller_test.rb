@@ -23,7 +23,7 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should redirect index when signed out" do
+  test "should redirect landing page when signed out" do
     get quests_url
     assert_redirected_to root_path
   end

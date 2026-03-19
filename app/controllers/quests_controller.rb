@@ -14,7 +14,7 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     @quest.giver = current_giver
-    if @quest.save!
+    if @quest.save
       redirect_to giver_path(current_giver)
     else
       render :new, status: :unprocessable_entity
@@ -31,6 +31,6 @@ class QuestsController < ApplicationController
 
   def quest_params
     params.require(:quest).permit(:title, :description, :reward_amount, :reward_type, :address_full, :suburb,
-                                  :category, :status)
+                                  :category)
   end
 end
