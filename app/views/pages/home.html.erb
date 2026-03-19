@@ -13,12 +13,12 @@
           members ready to help — and earn yen for their time.
         </p>
         <div class="d-flex gap-3 flex-wrap mt-4">
-          <% if user_signed_in? %>
+          <% if giver_signed_in? || accepter_signed_in? %>
             <%= link_to quests_path, class: "btn btn-outline-light btn-lg" do %>
               <i class="fa-solid fa-scroll me-2"></i>Browse Quests
             <% end %>
           <% else %>
-            <%= link_to new_user_registration_path, class: "btn btn-mustard btn-lg" do %>
+            <%= link_to new_giver_registration_path, class: "btn btn-mustard btn-lg" do %>
               <i class="fa-solid fa-user-plus me-2"></i>Join the Guild
             <% end %>
           <% end %>
@@ -101,7 +101,7 @@
             <li><i class="fa-solid fa-check-circle me-2"></i>Home &amp; garden tasks</li>
             <li><i class="fa-solid fa-check-circle me-2"></i>Companionship &amp; conversation</li>
           </ul>
-          <%= link_to "Post Your First Quest", new_user_registration_path, class: "btn btn-imperial" %>
+          <%= link_to "Post Your First Quest", new_giver_registration_path, class: "btn btn-imperial" %>
         </div>
       </div>
 
@@ -121,7 +121,7 @@
             <li><i class="fa-solid fa-check-circle me-2"></i>Build meaningful relationships</li>
             <li><i class="fa-solid fa-check-circle me-2"></i>Make a real difference</li>
           </ul>
-          <%= link_to "Start Accepting Quests", new_user_registration_path, class: "btn btn-mustard" %>
+          <%= link_to "Start Accepting Quests", new_accepter_registration_path, class: "btn btn-mustard" %>
         </div>
       </div>
 
@@ -137,8 +137,8 @@
       Become part of a community that looks out for each other.
     </p>
     <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <%= link_to "Create an Account", new_user_registration_path, class: "btn btn-imperial btn-lg" %>
-      <%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-secondary btn-lg" %>
+      <%= link_to "I Need Help", new_giver_registration_path, class: "btn btn-imperial btn-lg" %>
+      <%= link_to "I Want to Help", new_accepter_registration_path, class: "btn btn-mustard btn-lg" %>
     </div>
   </div>
 </section>

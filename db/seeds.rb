@@ -1,22 +1,43 @@
-# Idempotent seeds — safe to run multiple times
+# Clean slate before seeding
+puts "Cleaning database..."
+Review.destroy_all
+QuestApplication.destroy_all
+Quest.destroy_all
+Accepter.destroy_all
+Giver.destroy_all
+
 puts "Seeding..."
 
-# ── Givers (older adults posting help requests) ───────────────────────────────
+# ── Givers (older adults posting help requests) ──────────────────────────────
 giver_records = [
-  { first_name: "Haruko", email: "haruko@example.com", suburb: "Nakameguro" },
-  { first_name: "Kenji",  email: "kenji@example.com",  suburb: "Meguro" },
-  { first_name: "Fumiko", email: "fumiko@example.com", suburb: "Shibuya" },
+  { email: "giver1@guild.com",  first_name: "Haruko",  suburb: "Nakameguro",      emergency_contact_name: "Keiko Tanaka",      emergency_contact_phone: "090-1234-5678" },
+  { email: "giver2@guild.com",  first_name: "Kenji",   suburb: "Meguro",          emergency_contact_name: "Hiroshi Yamamoto",  emergency_contact_phone: "090-2345-6789" },
+  { email: "giver3@guild.com",  first_name: "Fumiko",  suburb: "Shibuya",         emergency_contact_name: "Taro Ito",          emergency_contact_phone: "090-3456-7890" },
+  { email: "giver4@guild.com",  first_name: "Yoshiko", suburb: "Shinjuku",        emergency_contact_name: "Akira Yoshida",     emergency_contact_phone: "090-4567-8901" },
+  { email: "giver5@guild.com",  first_name: "Masao",   suburb: "Setagaya",        emergency_contact_name: "Yoko Sasaki",       emergency_contact_phone: "090-5678-9012" },
+  { email: "giver6@guild.com",  first_name: "Kimiko",  suburb: "Nerima",          emergency_contact_name: "Jun Kimura",        emergency_contact_phone: "090-6789-0123" },
+  { email: "giver7@guild.com",  first_name: "Saburo",  suburb: "Koenji",          emergency_contact_name: "Mika Hayashi",      emergency_contact_phone: "090-7890-1234" },
+  { email: "giver8@guild.com",  first_name: "Noriko",  suburb: "Shimokitazawa",   emergency_contact_name: "Ryo Inoue",         emergency_contact_phone: "090-8901-2345" },
+  { email: "giver9@guild.com",  first_name: "Takeshi", suburb: "Minami-Aoyama",   emergency_contact_name: "Saki Abe",          emergency_contact_phone: "090-9012-3456" },
+  { email: "giver10@guild.com", first_name: "Hisako",  suburb: "Sangenjaya",      emergency_contact_name: "Naoto Fujiwara",    emergency_contact_phone: "090-0123-4567" }
 ].map do |attrs|
   Giver.find_or_create_by!(email: attrs[:email]) do |g|
     g.assign_attributes(attrs.merge(password: "password123"))
   end
 end
 
-# ── Accepters (younger community members) ─────────────────────────────────────
+# ── Accepters (younger community members) ────────────────────────────────────
 accepter_records = [
-  { full_name: "Ren Kobayashi", email: "ren@example.com"   },
-  { full_name: "Yui Nakamura",  email: "yui@example.com"   },
-  { full_name: "Daiki Suzuki",  email: "daiki@example.com" },
+  { email: "accepter1@guild.com",  full_name: "Ren Kobayashi",   trust_tier: "new",     quests_completed: 0 },
+  { email: "accepter2@guild.com",  full_name: "Yui Nakamura",    trust_tier: "trusted", quests_completed: 4 },
+  { email: "accepter3@guild.com",  full_name: "Daiki Suzuki",    trust_tier: "new",     quests_completed: 1 },
+  { email: "accepter4@guild.com",  full_name: "Aoi Watanabe",    trust_tier: "trusted", quests_completed: 6 },
+  { email: "accepter5@guild.com",  full_name: "Sora Inoue",      trust_tier: "new",     quests_completed: 0 },
+  { email: "accepter6@guild.com",  full_name: "Hana Kato",       trust_tier: "veteran", quests_completed: 12 },
+  { email: "accepter7@guild.com",  full_name: "Riku Hayashi",    trust_tier: "trusted", quests_completed: 3 },
+  { email: "accepter8@guild.com",  full_name: "Nana Yamada",     trust_tier: "new",     quests_completed: 2 },
+  { email: "accepter9@guild.com",  full_name: "Kai Matsumoto",   trust_tier: "veteran", quests_completed: 9 },
+  { email: "accepter10@guild.com", full_name: "Mia Tanaka",      trust_tier: "trusted", quests_completed: 5 }
 ].map do |attrs|
   Accepter.find_or_create_by!(email: attrs[:email]) do |a|
     a.assign_attributes(attrs.merge(password: "password123"))
@@ -93,6 +114,48 @@ quest_data = [
     expires_at: 4.days.from_now,
     status: "open"
   },
+  {
+    giver: giver_records[3],
+    title: "Water my plants while I visit family",
+    description: "Going to Kyoto for 5 days. I have about 12 indoor plants that need watering every other day. Key will be left with the building manager.",
+    category: "household", suburb: "Shinjuku", reward_amount: 2000, reward_type: "yen",
+    expires_at: 10.days.from_now, status: "open"
+  },
+  {
+    giver: giver_records[4],
+    title: "Help me sort through old photographs",
+    description: "I have boxes of old photos I'd like help organising and scanning. Good company welcome too!",
+    category: "other", suburb: "Setagaya", reward_amount: 1800, reward_type: "yen",
+    expires_at: 2.weeks.from_now, status: "open"
+  },
+  {
+    giver: giver_records[5],
+    title: "Assemble a flat-pack bookshelf",
+    description: "Bought a new bookshelf from IKEA but assembling furniture on my own is difficult. Tools available at home.",
+    category: "household", suburb: "Nerima", reward_amount: 2500, reward_type: "yen",
+    expires_at: 1.week.from_now, status: "open"
+  },
+  {
+    giver: giver_records[6],
+    title: "Walk my dog on Saturday morning",
+    description: "My usual walker is away this Saturday. Hana is a friendly shiba inu, about 30 minutes around the local park is all she needs.",
+    category: "other", suburb: "Koenji", reward_amount: 1200, reward_type: "yen",
+    expires_at: 6.days.from_now, status: "open"
+  },
+  {
+    giver: giver_records[7],
+    title: "Help install a printer and test it works",
+    description: "New printer arrived but I cannot get it connected to my laptop. Would need someone patient with older technology.",
+    category: "tech_help", suburb: "Shimokitazawa", reward_amount: 2000, reward_type: "yen",
+    expires_at: 5.days.from_now, status: "in_progress", accepter: accepter_records[3]
+  },
+  {
+    giver: giver_records[8],
+    title: "Pick up a prescription from the pharmacy",
+    description: "My prescription is ready at the Aoyama pharmacy but I'm not well enough to go myself. It's a 10-minute walk from Omotesando station.",
+    category: "transport", suburb: "Minami-Aoyama", reward_amount: 1000, reward_type: "yen",
+    expires_at: 2.days.from_now, status: "open"
+  }
 ]
 
 quest_records = quest_data.map do |attrs|
