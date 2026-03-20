@@ -4,7 +4,6 @@
   <% if current_giver %>
     <%= render "giver_index" %>
   <% else %>
-    <%# wont render anything ATM %>
     <div id="root" data-quests="<%= @quests.to_json %>"></div>
   <% end %>
 </div>
