@@ -46,7 +46,7 @@
             <div data-onboarding-target="step">
               <%= f.input :suburb,
                           required: true,
-                          collection: TokyoWard::WARDS,
+                          collection: TokyoWard::WARDS.map { |w| [w, w.downcase] },
                           include_blank: "Select your ward",
                           hint: "We'll show you quests in your ward" %>
 

@@ -8,12 +8,40 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
       first_name: "Test Giver",
       email: "giver@example.com",
       password: "password123",
-      suburb: "Shinjuku"
+      suburb: "shinjuku"
+    )
+    @other_giver = Giver.create!(
+      first_name: "Other Giver",
+      email: "other_giver@example.com",
+      password: "password123",
+      suburb: "shibuya"
+    )
+    @accepter = Accepter.create!(
+      full_name: "Test Accepter",
+      email: "accepter@example.com",
+      password: "password123",
+      suburb: "shinjuku"
     )
     @quest = Quest.create!(
       title: "Test Quest",
       description: "A test quest description",
-      giver: @giver
+      giver: @giver,
+      suburb: "shinjuku",
+      status: "open"
+    )
+    @other_quest = Quest.create!(
+      title: "Other Giver Quest",
+      description: "Belongs to someone else",
+      giver: @other_giver,
+      suburb: "shibuya",
+      status: "open"
+    )
+    @different_suburb_quest = Quest.create!(
+      title: "Different Suburb Quest",
+      description: "Open quest in a different ward",
+      giver: @other_giver,
+      suburb: "meguro",
+      status: "open"
     )
   end
 
@@ -21,6 +49,27 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
     sign_in @giver
     get quests_url
     assert_response :success
+  end
+
+  test "giver index only shows their own quests" do
+    sign_in @giver
+    get quests_url
+    assert_match @quest.title, response.body
+    assert_no_match @other_quest.title, response.body
+  end
+
+  test "accepter index only shows open quests in their ward" do
+    sign_in @accepter
+    get quests_url
+    assert_match @quest.title, response.body
+    assert_no_match @different_suburb_quest.title, response.body
+  end
+
+  test "accepter index does not show non-open quests in their ward" do
+    @quest.update!(status: "in_progress")
+    sign_in @accepter
+    get quests_url
+    assert_no_match @quest.title, response.body
   end
 
   test "should redirect landing page when signed out" do
@@ -48,7 +97,7 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
           title: "New Quest",
           description: "Quest description",
           category: "groceries",
-          suburb: "Shibuya",
+          suburb: "shibuya",
           reward_amount: 1000,
           reward_type: "yen"
         }

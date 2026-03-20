@@ -46,7 +46,7 @@
             <div data-onboarding-target="step">
               <%= f.input :suburb,
                           required: true,
-                          collection: TokyoWard::WARDS,
+                          collection: TokyoWard::WARDS.map { |w| [w, w.downcase] },
                           include_blank: "Select your ward",
                           hint: "The area where you live — shown publicly on your quests" %>
               <%= f.input :emergency_contact_name,

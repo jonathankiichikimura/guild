@@ -36,7 +36,7 @@
         </div>
 
         <%# Accept button — shown only if quest is open and current user is not the quest giver %>
-        <% if @quest.status == "open" && current_user != @quest.quest_giver %>
+        <% if @quest.status == "open" && accepter_signed_in? %>
           <div class="flex-shrink-0">
             <button class="btn btn-accept btn-lg" type="button" aria-label="Accept this quest: <%= @quest.title %>">
               <i class="fa-solid fa-handshake me-2" aria-hidden="true"></i>Accept Quest
@@ -74,31 +74,31 @@
                 <dt class="quest-show__meta-label">
                   <i class="fa-solid fa-yen-sign me-1" aria-hidden="true"></i>Reward
                 </dt>
-                <dd class="quest-show__meta-value" aria-label="Reward: <%= number_to_currency(@quest.reward, unit: '¥', precision: 0, format: '%u%n') %>">
-                  <span class="quest-show__reward-amount"><%= number_with_delimiter(@quest.reward) %></span>
+                <dd class="quest-show__meta-value" aria-label="Reward: <%= number_to_currency(@quest.reward_amount, unit: '¥', precision: 0, format: '%u%n') %>">
+                  <span class="quest-show__reward-amount"><%= number_with_delimiter(@quest.reward_amount) %></span>
                   <span class="quest-show__reward-unit ms-1">¥</span>
                 </dd>
               </div>
 
               <%# Deadline %>
-              <% if @quest.due_date.present? %>
+              <% if @quest.expires_at.present? %>
                 <div class="quest-show__meta-item">
                   <dt class="quest-show__meta-label">
                     <i class="fa-regular fa-calendar me-1" aria-hidden="true"></i>Deadline
                   </dt>
                   <dd class="quest-show__meta-value">
-                    <%= @quest.due_date.strftime("%B %-d, %Y") %>
+                    <%= @quest.expires_at.strftime("%B %-d, %Y") %>
                   </dd>
                 </div>
               <% end %>
 
               <%# Location %>
-              <% if @quest.location.present? %>
+              <% if @quest.suburb.present? %>
                 <div class="quest-show__meta-item">
                   <dt class="quest-show__meta-label">
                     <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>Location
                   </dt>
-                  <dd class="quest-show__meta-value"><%= @quest.location %></dd>
+                  <dd class="quest-show__meta-value"><%= "#{@quest.suburb[0].upcase}#{@quest.suburb[1..@quest.suburb.length]}" %></dd>
                 </div>
               <% end %>
 
@@ -129,9 +129,8 @@
               <i class="fa-solid fa-user me-2" aria-hidden="true"></i>Posted By
             </h2>
 
-            <% giver = @quest.quest_giver %>
-            <% giver_name = [giver.first_name, giver.last_name].select(&:present?).join(" ") %>
-            <% giver_name = giver.email.split("@").first if giver_name.blank? %>
+            <% giver = @quest.giver %>
+            <% giver_name = giver.first_name.presence || giver.email.split("@").first %>
             <% giver_initials = giver_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
 
             <div class="d-flex align-items-center gap-3">
@@ -140,9 +139,6 @@
               </div>
               <div class="min-width-0">
                 <p class="quest-show__giver-name mb-0"><%= giver_name %></p>
-                <% if giver.bio.present? %>
-                  <p class="quest-show__giver-bio mt-1 mb-0"><%= truncate(giver.bio, length: 100) %></p>
-                <% end %>
               </div>
             </div>
           </div>
