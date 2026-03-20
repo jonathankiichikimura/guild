@@ -2,17 +2,8 @@ require "test_helper"
 
 class QuestApplicationTest < ActiveSupport::TestCase
   setup do
-    @giver = Giver.create!(
-      first_name: "Test Giver",
-      email: "giver@example.com",
-      password: "password123",
-      suburb: "Shinjuku"
-    )
-    @accepter = Accepter.create!(
-      full_name: "Test Accepter",
-      email: "accepter@example.com",
-      password: "password123"
-    )
+    @giver = Giver.create!(valid_giver_attrs)
+    @accepter = Accepter.create!(valid_accepter_attrs)
     @quest = Quest.create!(
       title: "Test Quest",
       description: "A test quest description",

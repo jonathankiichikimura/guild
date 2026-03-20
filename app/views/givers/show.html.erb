@@ -18,7 +18,7 @@
               <% if @giver.suburb.present? %>
                 <span class="index-info-container__subtitle">
                   <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>
-                  <%= @giver.suburb %>
+                  <%= @giver.suburb.humanize %>
                 </span>
               <% end %>
             </div>
@@ -51,7 +51,7 @@
                       <i class="fa-solid fa-map-pin fa-fw me-1" aria-hidden="true"></i>
                       Suburb
                     </dt>
-                    <dd class="quest-show__meta-value"><%= @giver.suburb %></dd>
+                    <dd class="quest-show__meta-value"><%= @giver.suburb.humanize %></dd>
                   </div>
                 <% end %>
 

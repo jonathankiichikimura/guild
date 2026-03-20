@@ -4,24 +4,9 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @giver = Giver.create!(
-      first_name: "Test Giver",
-      email: "giver@example.com",
-      password: "password123",
-      suburb: "shinjuku"
-    )
-    @other_giver = Giver.create!(
-      first_name: "Other Giver",
-      email: "other_giver@example.com",
-      password: "password123",
-      suburb: "shibuya"
-    )
-    @accepter = Accepter.create!(
-      full_name: "Test Accepter",
-      email: "accepter@example.com",
-      password: "password123",
-      suburb: "shinjuku"
-    )
+    @giver = Giver.create!(valid_giver_attrs)
+    @other_giver = Giver.create!(valid_giver_attrs(email: "other_giver@example.com", suburb: "shibuya"))
+    @accepter = Accepter.create!(valid_accepter_attrs)
     @quest = Quest.create!(
       title: "Test Quest",
       description: "A test quest description",

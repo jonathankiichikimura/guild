@@ -2,12 +2,7 @@ require "test_helper"
 
 class QuestTest < ActiveSupport::TestCase
   setup do
-    @giver = Giver.create!(
-      first_name: "Test Giver",
-      email: "giver@example.com",
-      password: "password123",
-      suburb: "Shinjuku"
-    )
+    @giver = Giver.create!(valid_giver_attrs)
   end
 
   test "valid with required attributes" do

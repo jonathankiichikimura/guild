@@ -98,7 +98,7 @@
                   <dt class="quest-show__meta-label">
                     <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>Location
                   </dt>
-                  <dd class="quest-show__meta-value"><%= "#{@quest.suburb[0].upcase}#{@quest.suburb[1..@quest.suburb.length]}" %></dd>
+                  <dd class="quest-show__meta-value"><%= @quest.suburb.humanize %></dd>
                 </div>
               <% end %>
 

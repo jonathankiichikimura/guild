@@ -10,6 +10,9 @@ class Giver < ApplicationRecord
   include TokyoWard
 
   validates :first_name, presence: true
+  validates :suburb, presence: true
+  validates :emergency_contact_name, presence: true
+  validates :emergency_contact_phone, presence: true
 
   def display_name
     first_name.presence || email.split("@").first

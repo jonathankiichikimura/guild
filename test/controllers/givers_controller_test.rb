@@ -4,12 +4,7 @@ class GiversControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    @giver = Giver.create!(
-      first_name: "Test Giver",
-      email: "giver@example.com",
-      password: "password123",
-      suburb: "Shinjuku"
-    )
+    @giver = Giver.create!(valid_giver_attrs)
   end
 
   test "should get giver show" do
