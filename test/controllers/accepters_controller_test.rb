@@ -1,3 +1,5 @@
+require "test_helper"
+
 class AcceptersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
