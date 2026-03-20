@@ -1,28 +1,46 @@
-<h2>Sign up</h2>
+<div class="container py-6">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+      <div class="text-center mb-4">
+        <div class="step-icon-wrap mb-3">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <h2 class="section-title">Join as a Helper</h2>
+        <p class="section-subtitle">Browse local quests, lend your skills, and earn yen while building real connections.</p>
+      </div>
 
-  <div class="form-inputs">
-    <%= f.input :full_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "full name" }%>
-    <%= f.input :email,
-                required: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+      <div class="for-you-card for-you-accepter p-4 p-md-5">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :full_name,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "full name" }%>
+            <%= f.input :email,
+                        required: true,
+                        input_html: { autocomplete: "email" }%>
+            <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        input_html: { autocomplete: "new-password" } %>
+            <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password" } %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Start Accepting Quests", class: "btn btn-mustard w-100" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center mt-3">
+        <%= render "accepters/shared/links" %>
+      </div>
+
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "accepters/shared/links" %>
+</div>
