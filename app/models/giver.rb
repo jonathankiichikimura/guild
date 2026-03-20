@@ -3,8 +3,6 @@ class Giver < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
 
   has_many :quests, foreign_key: :giver_id, dependent: :destroy
   has_many :reviews, foreign_key: :giver_id, dependent: :destroy
