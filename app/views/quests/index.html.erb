@@ -55,7 +55,7 @@
                   <div class="quest-card__details d-flex flex-wrap gap-3 mt-2">
                     <% if quest.suburb.present? %>
                       <span class="quest-card__detail">
-                        <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= quest.suburb %>
+                        <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= quest.suburb.humanize %>
                       </span>
                     <% end %>
                     <% if quest.expires_at.present? %>

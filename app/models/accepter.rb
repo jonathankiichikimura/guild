@@ -4,6 +4,10 @@ class Accepter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  include TokyoWard
+
+  validates :suburb, presence: true
+
   has_many :quest_applications, dependent: :destroy
   has_many :quests, through: :quest_applications
   has_many :reviews, foreign_key: :accepter_id, dependent: :destroy

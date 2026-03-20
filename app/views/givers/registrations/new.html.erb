@@ -46,7 +46,15 @@
             <div data-onboarding-target="step">
               <%= f.input :suburb,
                           required: true,
+                          collection: TokyoWard::WARDS.map { |w| [w, w.downcase] },
+                          include_blank: "Select your ward",
                           hint: "The area where you live — shown publicly on your quests" %>
+              <%= f.input :emergency_contact_name,
+                          required: true,
+                          label: "Emergency contact name" %>
+              <%= f.input :emergency_contact_phone,
+                          required: true,
+                          label: "Emergency contact phone" %>
 
               <div class="mt-2">
                 <%= f.button :submit, "Post Your First Quest", class: "btn btn-imperial w-100" %>

@@ -1,6 +1,10 @@
 class QuestsController < ApplicationController
   def index
-    @quests = Quest.where(status: "open")
+    if giver_signed_in?
+      @quests = Quest.where(giver: current_giver)
+    elsif accepter_signed_in?
+      @quests = Quest.where(status: "open", suburb: current_accepter.suburb)
+    end
   end
 
   def show
