@@ -5,6 +5,6 @@
     <%= render "giver_index" %>
   <% else %>
     <%# wont render anything ATM %>
-    <%= render "accepter_index" %>
+    <div id="root" data-quests="<%= @quests.to_json %>"></div>
   <% end %>
 </div>
