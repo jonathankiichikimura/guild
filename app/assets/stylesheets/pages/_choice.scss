@@ -1,0 +1,75 @@
+// ─── Choice page ─────────────────────────────────────────────────────────────
+
+.choice-page {
+  background: $light-gray;
+  min-height: calc(100vh - 64px); // fill viewport below navbar
+}
+
+// Card title & subtitle — slightly smaller than the global section-title
+// so they sit comfortably inside each card without fighting the page header.
+.choice-card {
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba($imperial-blue, 0.12);
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $imperial-blue;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #6c757d;
+  }
+
+  &__btn {
+    font-size: 1.05rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 48px; // accessible touch target
+    border-radius: 8px;
+  }
+
+  // Accepter icon uses mustard tint to visually distinguish from giver (blue tint)
+  &__icon--accepter {
+    background: rgba($mustard, 0.2);
+
+    i {
+      color: darken($mustard, 20%);
+    }
+  }
+}
+
+// Sign-in footer line
+.choice-page__signin {
+  font-size: 0.95rem;
+  color: #6c757d;
+
+  a {
+    color: $steel-azure;
+    font-weight: 600;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      color: $imperial-blue;
+    }
+  }
+}
+
+// Respect reduced-motion preference
+@media (prefers-reduced-motion: reduce) {
+  .choice-card {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

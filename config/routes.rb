@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
   root to: "pages#home"
+  get "/choice", to: "pages#choice", as: :choice
 
   resources :quests, only: [:index, :show, :new, :create, :update, :destroy] do
     resources :reviews, only: [:new, :create]

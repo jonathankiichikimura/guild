@@ -7,6 +7,8 @@ class Giver < ApplicationRecord
   has_many :quests, foreign_key: :giver_id, dependent: :destroy
   has_many :reviews, foreign_key: :giver_id, dependent: :destroy
 
+  include TokyoWard
+
   validates :first_name, presence: true
 
   def display_name

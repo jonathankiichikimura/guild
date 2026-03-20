@@ -7,6 +7,13 @@ export default class extends Controller {
 
   connect() {
     this.showStep(this.currentValue)
+    this._form = this.element.closest('form')
+    this._submitHandler = this.handleSubmit.bind(this)
+    if (this._form) this._form.addEventListener('submit', this._submitHandler)
+  }
+
+  disconnect() {
+    if (this._form) this._form.removeEventListener('submit', this._submitHandler)
   }
 
   advance(event) {
@@ -14,6 +21,14 @@ export default class extends Controller {
     const next = this.currentValue + delta
     if (next >= 0 && next < this.stepTargets.length) {
       this.currentValue = next
+      this.showStep(this.currentValue)
+    }
+  }
+
+  handleSubmit(event) {
+    if (this.currentValue < this.stepTargets.length - 1) {
+      event.preventDefault()
+      this.currentValue += 1
       this.showStep(this.currentValue)
     }
   }

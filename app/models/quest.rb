@@ -1,4 +1,6 @@
 class Quest < ApplicationRecord
+  include TokyoWard
+
   belongs_to :giver
   belongs_to :accepter, optional: true
   has_many :reviews, dependent: :destroy
