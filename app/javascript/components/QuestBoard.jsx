@@ -1,4 +1,3 @@
-import React from "react"
 import Board from "./quest_board/Board"
 
 function QuestBoard() {
