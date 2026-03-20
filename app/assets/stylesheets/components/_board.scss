@@ -1,0 +1,52 @@
+.board-frame {
+  position: relative;
+  background: #6b2e10;
+  border-radius: 8px;
+  padding: 26px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.cork-board {
+  background-color: #b5845a;
+  border-radius: 3px;
+  border: 2px solid #7a5030;
+  min-height: 520px;
+  padding: 28px 22px 36px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 3px;
+    background-image:
+      radial-gradient(ellipse 90px 60px at 8% 12%, rgba(175,120,65,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 120px 80px at 70% 8%, rgba(145,95,45,0.55) 0%, transparent 70%),
+      radial-gradient(ellipse 100px 70px at 30% 70%, rgba(160,108,55,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 80px 100px at 88% 55%, rgba(135,85,38,0.5) 0%, transparent 70%),
+      radial-gradient(circle 3px at 22% 35%, rgba(90,55,20,0.7) 0%, transparent 100%),
+      radial-gradient(circle 2px at 55% 18%, rgba(80,48,18,0.6) 0%, transparent 100%),
+      radial-gradient(circle 3px at 78% 72%, rgba(95,58,22,0.65) 0%, transparent 100%);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 3px;
+    mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(ellipse 160px 120px at 5% 5%, rgba(40,18,5,0.32) 0%, transparent 75%),
+      radial-gradient(ellipse 200px 80px at 48% 2%, rgba(200,170,120,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 180px 160px at 100% 100%, rgba(30,12,2,0.38) 0%, transparent 65%),
+      radial-gradient(ellipse 120px 100px at 100% 0%, rgba(35,14,3,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 50px 200px at 2% 55%, rgba(45,22,6,0.22) 0%, transparent 70%),
+      linear-gradient(to top, rgba(30,12,2,0.22) 0%, transparent 25%);
+  }
+}
