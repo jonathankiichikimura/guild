@@ -1,3 +1,4 @@
+import React from 'react'
 import Flyer from "./Flyer"
 
 function Board({ quests }) {
