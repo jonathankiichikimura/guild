@@ -1,0 +1,51 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div data-controller="onboarding">
+    <p data-onboarding-target="progress"></p>
+
+    <div data-onboarding-target="step">
+      <%= f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "given-name" } %>
+      <%= f.input :email,
+                  required: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
+    </div>
+
+    <div data-onboarding-target="step">
+      <%= f.input :suburb,
+                  required: true,
+                  hint: "The area where you live — shown publicly on your quests" %>
+      <%= f.button :submit, "Join the Guild", class: "btn btn-imperial" %>
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+      <span data-onboarding-target="backBtn">
+        <button type="button"
+                data-action="onboarding#advance"
+                data-onboarding-step-param="-1"
+                class="btn btn-outline-secondary">Back</button>
+      </span>
+
+      <span data-onboarding-target="nextBtn">
+        <button type="button"
+                data-action="onboarding#advance"
+                data-onboarding-step-param="+1"
+                class="btn btn-mustard">Next</button>
+      </span>
+    </div>
+  </div>
+<% end %>
+
+<%= render "givers/shared/links" %>

@@ -8,17 +8,17 @@
   <div class="quests-sidebar__inner d-flex flex-md-column align-items-center align-items-md-start gap-3 pt-2">
 
     <%# Current user avatar — initials-based placeholder %>
-    <% display_name = [current_user.first_name, current_user.last_name].select(&:present?).join(" ") %>
-    <% display_name = current_user.email.split("@").first if display_name.blank? %>
+    <% current_user = giver_signed_in? ? current_giver : current_accepter %>
+    <% display_name = current_user.display_name %>
     <% initials = display_name.split(" ").first(2).map { |n| n[0].upcase }.join %>
     <div class="quests-sidebar__avatar-wrap text-center w-100">
-      <%= link_to user_path(current_user), class: "text-decoration-none d-inline-block quests-sidebar__avatar-link" do %>
+      <%= link_to giver_signed_in? ? giver_path(current_giver) : accepter_path(current_accepter), class: "text-decoration-none d-inline-block quests-sidebar__avatar-link" do %>
       <div class="quests-sidebar__avatar-placeholder rounded-circle d-flex align-items-center justify-content-center mx-auto" aria-label="Your avatar — <%= display_name %>">
         <span class="quests-sidebar__avatar-initials"><%= initials %></span>
       </div>
       <% end %>
       <p class="quests-sidebar__username mt-2 mb-0 fw-semibold text-truncate">
-        <%= link_to display_name, user_path(current_user), class: "text-decoration-none text-reset" %>
+        <%= link_to display_name, giver_signed_in? ? giver_path(current_giver) : accepter_path(current_accepter), class: "text-decoration-none text-reset" %>
       </p>
     </div>
 
@@ -31,7 +31,7 @@
       <a href="<%= quests_path %>" class="quests-sidebar__nav-link <%= 'active' if local_assigns[:active_link] == :index %>" <%= 'aria-current="page"' if local_assigns[:active_link] == :index %>>
         <i class="fa-solid fa-list me-2" aria-hidden="true"></i>All Quests
       </a>
-      <% if user_signed_in? %>
+      <% if giver_signed_in? || accepter_signed_in? %>
         <a href="<%= new_quest_path %>" class="quests-sidebar__nav-link quests-sidebar__nav-link--cta">
           <i class="fa-solid fa-circle-plus me-2" aria-hidden="true"></i>Post a Quest
         </a>

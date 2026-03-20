@@ -18,7 +18,7 @@
             <%= @quests.count == 1 ? "quest" : "quests" %> available in your community
           </p>
         </div>
-        <% if user_signed_in? %>
+        <% if giver_signed_in? || accepter_signed_in? %>
           <%= link_to new_quest_path, class: "btn btn-mustard btn-lg flex-shrink-0 d-md-none", aria: { label: "Post a new quest" } do %>
             <i class="fa-solid fa-circle-plus me-2" aria-hidden="true"></i>Post a Quest
           <% end %>
@@ -53,22 +53,22 @@
 
                   <%# Location + due date %>
                   <div class="quest-card__details d-flex flex-wrap gap-3 mt-2">
-                    <% if quest.location.present? %>
+                    <% if quest.suburb.present? %>
                       <span class="quest-card__detail">
-                        <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= quest.location %>
+                        <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= quest.suburb %>
                       </span>
                     <% end %>
-                    <% if quest.due_date.present? %>
+                    <% if quest.expires_at.present? %>
                       <span class="quest-card__detail">
-                        <i class="fa-regular fa-calendar me-1" aria-hidden="true"></i><%= quest.due_date.strftime("%b %-d, %Y") %>
+                        <i class="fa-regular fa-calendar me-1" aria-hidden="true"></i><%= quest.expires_at.strftime("%b %-d, %Y") %>
                       </span>
                     <% end %>
                   </div>
                 </div>
 
                 <%# Reward badge %>
-                <div class="quest-card__reward-wrap flex-shrink-0 text-center" aria-label="Reward: <%= number_to_currency(quest.reward, unit: '¥', precision: 0, format: '%u%n') %>">
-                  <span class="quest-card__reward-amount"><%= number_with_delimiter(quest.reward) %></span>
+                <div class="quest-card__reward-wrap flex-shrink-0 text-center" aria-label="Reward: <%= number_to_currency(quest.reward_amount, unit: '¥', precision: 0, format: '%u%n') %>">
+                  <span class="quest-card__reward-amount"><%= number_with_delimiter(quest.reward_amount) %></span>
                   <span class="quest-card__reward-unit">¥</span>
                 </div>
 
