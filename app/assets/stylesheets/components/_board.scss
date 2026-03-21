@@ -4,6 +4,52 @@
   border-radius: 8px;
   padding: 26px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(92deg,
+        #7a3318 0px, #6b2e10 4px, #8e3e20 9px,
+        #7a3318 14px, #5a2208 18px, #8e3e20 24px,
+        #7a3318 30px, #5a2208 36px, #8e3e20 42px
+      ),
+      linear-gradient(180deg, #9a4428 0%, #6b2e10 45%, #7e3818 75%, #5a2208 100%);
+    background-blend-mode: multiply;
+  }
+
+  &__corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 30% 30%, #c0a080, #2a1006);
+    box-shadow:
+      inset 0 0 5px rgba(0, 0, 0, 0.6),
+      0 2px 6px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(0,0,0,0.4);
+    z-index: 6;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #e0d0b0, #5a4020 40%, #1a0a02);
+      box-shadow: 0 0 4px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    &--tl { top: -2px; left: -2px; border-radius: 4px 4px 4px 4px; }
+    &--tr { top: -2px; right: -2px; border-radius: 4px 4px 4px 4px; }
+    &--bl { bottom: -2px; left: -2px; border-radius: 4px 4px 4px 4px; }
+    &--br { bottom: -2px; right: -2px; border-radius: 4px 4px 4px 4px; }
+  }
 }
 
 .cork-board {
