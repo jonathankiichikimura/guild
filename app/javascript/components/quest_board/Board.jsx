@@ -10,7 +10,7 @@ function Board({ quests }) {
       <div className="board-frame__corner board-frame__corner--bl"></div>
       <div className="board-frame__corner board-frame__corner--br"></div>
       <div className="cork-board">
-        {quests.map((quest) => <Flyer key={quest.id} quest={quest} />)}
+        {quests.map((quest, index) => <Flyer key={quest.id} quest={quest} index={index} />)}
       </div>
     </div>
   )
