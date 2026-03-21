@@ -57,9 +57,21 @@ function Flyer({ quest, index }) {
     </svg>
   ]
 
+  const pinVariant = index % 2
+  const pins = [
+    // variant 0 — single pin centered
+    <div key={0} className="flyer__pin" style={{left: '50%', transform: 'translateX(-50%)'}}></div>,
+
+    // variant 1 — two pins, left and right
+    <>
+      <div key="pin-l" className="flyer__pin" style={{left: '25%', transform: 'translateX(-50%)'}}></div>
+      <div key="pin-r" className="flyer__pin" style={{left: '75%', transform: 'translateX(-50%)'}}></div>
+    </>
+  ]
+
   return (
     <div className="flyer">
-      <div className="flyer__pin"></div>
+      {pins[pinVariant]}
       <div className="flyer__paper">
         {showBurn && burns[burnVariant]}
         <h3>{quest.title}</h3>
