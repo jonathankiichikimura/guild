@@ -1,0 +1,73 @@
+.flyer {
+  position: relative;
+  width: 178px;
+  flex-shrink: 0;
+  cursor: pointer;
+  z-index: 2;
+
+  &:hover {
+    z-index: 10;
+    filter: brightness(1.03);
+  }
+
+  &__paper {
+  background: #ffffff;
+  padding: 20px 16px 26px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(ellipse 80px 55px at 95% 8%, rgba(180,150,90,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60px 70px at 5% 88%, rgba(160,130,75,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 100px 45px at 50% 96%, rgba(170,140,80,0.08) 0%, transparent 70%),
+        radial-gradient(circle 35px at 82% 55%, rgba(190,160,95,0.07) 0%, transparent 100%);
+    }
+  }
+
+  &:nth-child(odd) {
+    transform: rotate(-2.5deg) translateY(8px);
+  }
+
+  &:nth-child(even) {
+    transform: rotate(2deg) translateY(-4px);
+  }
+
+  &:nth-child(3n) {
+    transform: rotate(-1.5deg) translateY(12px);
+  }
+
+  &:nth-child(4n) {
+    transform: rotate(3deg) translateY(6px);
+  }
+
+  &__pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #c0724a, #8b3e1e);
+    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.35), inset 1px 1px 3px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.4);
+    z-index: 20;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 8px;
+      background: #888;
+      border-radius: 0 0 2px 2px;
+    }
+  }
+}
