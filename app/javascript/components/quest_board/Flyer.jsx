@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Flyer({ quest, index }) {
+function Flyer({ quest, index, slot, onMouseEnter, stack }) {
   const burnVariant = index % 4
   const showBurn = index % 8 < 4
   const burns = [
@@ -70,7 +70,17 @@ function Flyer({ quest, index }) {
   ]
 
   return (
-    <div className="flyer">
+    <div
+      className="flyer"
+      onMouseEnter={onMouseEnter}
+      style={{
+        position: "absolute",
+        left: `${slot.x}%`,
+        top: `${slot.y}%`,
+        transform: `rotate(${slot.rotation}deg)`,
+        zIndex: stack.indexOf(index) + 2
+      }}
+    >
       {pins[pinVariant]}
       <div className="flyer__paper">
         {showBurn && burns[burnVariant]}
