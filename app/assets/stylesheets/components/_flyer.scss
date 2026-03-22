@@ -30,22 +30,6 @@
     }
   }
 
-  &:nth-child(odd) {
-    transform: rotate(-2.5deg) translateY(8px);
-  }
-
-  &:nth-child(even) {
-    transform: rotate(2deg) translateY(-4px);
-  }
-
-  &:nth-child(3n) {
-    transform: rotate(-1.5deg) translateY(12px);
-  }
-
-  &:nth-child(4n) {
-    transform: rotate(3deg) translateY(6px);
-  }
-
   &__pin {
     position: absolute;
     top: -10px;
