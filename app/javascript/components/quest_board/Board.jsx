@@ -26,7 +26,10 @@ function Board({ quests }) {
 
   return (
     <div className="board-frame">
-      <div className="title-sign"></div>
+      <div className="title-sign">
+        <div className="title-sign__chain"></div>
+        <span><i class="fa-solid fa-khanda"></i> Guild Quests <i class="fa-solid fa-khanda"></i></span>
+      </div>
       <div className="board-frame__corner board-frame__corner--tl"></div>
       <div className="board-frame__corner board-frame__corner--tr"></div>
       <div className="board-frame__corner board-frame__corner--bl"></div>
