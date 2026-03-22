@@ -2,7 +2,7 @@
   position: relative;
   background: #6b2e10;
   border-radius: 8px;
-  padding: 32px;
+  padding: 26px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
 
   &::before {
@@ -153,4 +153,12 @@
     background: repeating-linear-gradient(180deg, #999 0px, #bbb 3px, #777 6px);
     border-radius: 1px;
   }
+}
+
+.board-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  cursor: pointer;
 }

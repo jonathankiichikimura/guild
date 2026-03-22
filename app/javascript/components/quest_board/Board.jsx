@@ -4,6 +4,7 @@ import { useState } from "react"
 
 function Board({ quests }) {
   const [stack, setStack] = useState([])
+  const [zoom, setZoom] = useState(null)
 
   const bringToFront = (index) => {
     setStack(prev => [...prev.filter(i => i !== index), index])
@@ -35,14 +36,17 @@ function Board({ quests }) {
       <div className="board-frame__corner board-frame__corner--bl"></div>
       <div className="board-frame__corner board-frame__corner--br"></div>
       <div className="cork-board">
+        {zoom && <div className="board-overlay" onClick={() => setZoom(null)} />}
         {quests.map((quest, index) => (
           <Flyer
             key={quest.id}
             quest={quest}
             index={index}
+            zoom={zoom}
+            stack={stack}
             slot={slots[index]}
             onMouseEnter={() => bringToFront(index)}
-            stack={stack}
+            onClick={() => setZoom(quest.id)}
           />
         ))}
       </div>

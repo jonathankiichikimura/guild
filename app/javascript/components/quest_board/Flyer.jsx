@@ -1,6 +1,7 @@
 import React from 'react'
+import { motion } from "framer-motion"
 
-function Flyer({ quest, index, slot, onMouseEnter, stack }) {
+function Flyer({ quest, index, slot, onMouseEnter, stack, onClick, zoom }) {
   const burnVariant = index % 4
   const showBurn = index % 8 < 4
   const burns = [
@@ -70,25 +71,33 @@ function Flyer({ quest, index, slot, onMouseEnter, stack }) {
   ]
 
   return (
-    <div
+    <motion.div
       className="flyer"
+      layoutId={quest.id}
       onMouseEnter={onMouseEnter}
+      onClick={onClick}
       style={{
         position: "absolute",
-        left: `${slot.x}%`,
-        top: `${slot.y}%`,
-        transform: `rotate(${slot.rotation}deg)`,
-        zIndex: stack.indexOf(index) + 2
+        left: quest.id === zoom ? "50%" : `${slot.x}%`,
+        top: quest.id === zoom ? "50%" : `${slot.y}%`,
+        x: quest.id === zoom ? "-50%" : 0,
+        y: quest.id === zoom ? "-50%" : 0,
+        rotate: quest.id === zoom ? 0 : slot.rotation,
+        width: quest.id === zoom ? "400px" : "178px",
+        zIndex: quest.id === zoom ? 100 : stack.indexOf(index) + 2
       }}
     >
-      {pins[pinVariant]}
-      <div className="flyer__paper">
+      {quest.id !== zoom && pins[pinVariant]}
+      <motion.div className="flyer__paper" layout="position">
         {showBurn && burns[burnVariant]}
         <h3>{quest.title}</h3>
         <span>{quest.description}</span>
         <span>{quest.reward_amount}{quest.reward_type}</span>
-      </div>
-    </div>
+        <div>
+          {quest.id === zoom && <button>Accept Quest</button>}
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
