@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_18_000006) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_20_053427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -28,6 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_18_000006) do
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.string "suburb"
     t.string "trust_tier"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_accepters_on_email", unique: true

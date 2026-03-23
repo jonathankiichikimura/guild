@@ -7,7 +7,12 @@ class Giver < ApplicationRecord
   has_many :quests, foreign_key: :giver_id, dependent: :destroy
   has_many :reviews, foreign_key: :giver_id, dependent: :destroy
 
+  include TokyoWard
+
   validates :first_name, presence: true
+  validates :suburb, presence: true
+  validates :emergency_contact_name, presence: true
+  validates :emergency_contact_phone, presence: true
 
   def display_name
     first_name.presence || email.split("@").first

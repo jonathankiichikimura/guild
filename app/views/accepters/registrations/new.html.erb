@@ -14,25 +14,55 @@
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= f.error_notification %>
 
-          <div class="form-inputs">
-            <%= f.input :full_name,
-                        required: true,
-                        autofocus: true,
-                        input_html: { autocomplete: "full name" }%>
-            <%= f.input :email,
-                        required: true,
-                        input_html: { autocomplete: "email" }%>
-            <%= f.input :password,
-                        required: true,
-                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                        input_html: { autocomplete: "new-password" } %>
-            <%= f.input :password_confirmation,
-                        required: true,
-                        input_html: { autocomplete: "new-password" } %>
-          </div>
+          <div data-controller="onboarding">
+            <p data-onboarding-target="progress"></p>
 
-          <div class="form-actions">
-            <%= f.button :submit, "Start Accepting Quests", class: "btn btn-mustard w-100" %>
+            <div data-onboarding-target="step">
+              <%= f.input :full_name,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "name" } %>
+              <%= f.input :email,
+                          required: true,
+                          input_html: { autocomplete: "email" } %>
+              <%= f.input :password,
+                          required: true,
+                          hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                          input_html: { autocomplete: "new-password" } %>
+              <%= f.input :password_confirmation,
+                          required: true,
+                          input_html: { autocomplete: "new-password" } %>
+
+              <div class="d-flex justify-content-end mt-3">
+                <span data-onboarding-target="nextBtn">
+                  <button type="button"
+                          data-action="onboarding#advance"
+                          data-onboarding-step-param="+1"
+                          class="btn btn-mustard">Next</button>
+                </span>
+              </div>
+            </div>
+
+            <div data-onboarding-target="step">
+              <%= f.input :suburb,
+                          required: true,
+                          collection: TokyoWard::WARDS.map { |w| [w, w.downcase] },
+                          include_blank: "Select your ward",
+                          hint: "We'll show you quests in your ward" %>
+
+              <div class="mt-2">
+                <%= f.button :submit, "Start Accepting Quests", class: "btn btn-mustard w-100" %>
+              </div>
+
+              <div class="d-flex mt-3">
+                <span data-onboarding-target="backBtn">
+                  <button type="button"
+                          data-action="onboarding#advance"
+                          data-onboarding-step-param="-1"
+                          class="btn btn-outline-secondary">Back</button>
+                </span>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

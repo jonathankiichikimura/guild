@@ -1,0 +1,118 @@
+<div class="quests-page py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-xl-8">
+
+        <%# ── Profile header ──────────────────────────────────────────────── %>
+        <div class="index-info-container p-4 p-md-5 mb-4">
+          <div class="d-flex align-items-center gap-4 flex-wrap">
+
+            <div class="giver-show__avatar" aria-hidden="true">
+              <%= @giver.first_name.to_s[0]&.upcase %>
+            </div>
+
+            <div>
+              <h1 class="index-info-container__title mb-1">
+                <%= @giver.first_name %>
+              </h1>
+              <% if @giver.suburb.present? %>
+                <span class="index-info-container__subtitle">
+                  <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>
+                  <%= @giver.suburb.humanize %>
+                </span>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row g-4">
+
+          <%# ── Profile details ──────────────────────────────────────────── %>
+          <div class="col-md-7">
+            <div class="quest-show__panel h-100">
+              <h2 class="quest-show__panel-heading">
+                <i class="fa-solid fa-circle-user me-2" aria-hidden="true"></i>
+                Profile
+              </h2>
+
+              <dl class="mb-0">
+                <div class="quest-show__meta-item">
+                  <dt class="quest-show__meta-label">
+                    <i class="fa-solid fa-user fa-fw me-1" aria-hidden="true"></i>
+                    Name
+                  </dt>
+                  <dd class="quest-show__meta-value"><%= @giver.first_name %></dd>
+                </div>
+
+                <% if @giver.suburb.present? %>
+                  <div class="quest-show__meta-item">
+                    <dt class="quest-show__meta-label">
+                      <i class="fa-solid fa-map-pin fa-fw me-1" aria-hidden="true"></i>
+                      Suburb
+                    </dt>
+                    <dd class="quest-show__meta-value"><%= @giver.suburb.humanize %></dd>
+                  </div>
+                <% end %>
+
+                <% if @giver.email.present? %>
+                  <div class="quest-show__meta-item quest-show__meta-item--last">
+                    <dt class="quest-show__meta-label">
+                      <i class="fa-solid fa-envelope fa-fw me-1" aria-hidden="true"></i>
+                      Email
+                    </dt>
+                    <dd class="quest-show__meta-value">
+                      <a href="mailto:<%= @giver.email %>" class="text-decoration-underline"
+                         style="color: inherit;">
+                        <%= @giver.email %>
+                      </a>
+                    </dd>
+                  </div>
+                <% end %>
+              </dl>
+            </div>
+          </div>
+
+          <%# ── Emergency contact ────────────────────────────────────────── %>
+          <div class="col-md-5">
+            <div class="quest-show__panel giver-show__emergency-panel h-100">
+              <h2 class="quest-show__panel-heading">
+                <i class="fa-solid fa-shield-heart me-2" aria-hidden="true"></i>
+                Emergency Contact
+              </h2>
+
+              <dl class="mb-0">
+                <% if @giver.emergency_contact_name.present? %>
+                  <div class="quest-show__meta-item">
+                    <dt class="quest-show__meta-label">
+                      <i class="fa-solid fa-user-shield fa-fw me-1" aria-hidden="true"></i>
+                      Name
+                    </dt>
+                    <dd class="quest-show__meta-value"><%= @giver.emergency_contact_name %></dd>
+                  </div>
+                <% end %>
+
+                <% if @giver.emergency_contact_phone.present? %>
+                  <div class="quest-show__meta-item quest-show__meta-item--last">
+                    <dt class="quest-show__meta-label">
+                      <i class="fa-solid fa-phone fa-fw me-1" aria-hidden="true"></i>
+                      Phone
+                    </dt>
+                    <dd class="quest-show__meta-value">
+                      <a href="tel:<%= @giver.emergency_contact_phone %>" class="text-decoration-underline"
+                         style="color: inherit;">
+                        <%= @giver.emergency_contact_phone %>
+                      </a>
+                    </dd>
+                  </div>
+                <% end %>
+              </dl>
+            </div>
+          </div>
+
+        </div><%# /row g-4 %>
+
+      </div><%# /col %>
+    </div><%# /row justify-content-center %>
+  </div><%# /container %>
+</div><%# /quests-page %>

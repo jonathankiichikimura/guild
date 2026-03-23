@@ -1,0 +1,23 @@
+// ─── Giver show page ─────────────────────────────────────────────────────────
+
+.giver-show {
+  &__avatar {
+    width: 88px;
+    height: 88px;
+    background-color: $imperial-blue;
+    color: white;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba($imperial-blue, 0.25);
+    user-select: none;
+  }
+
+  &__emergency-panel {
+    border-left: 4px solid $mustard;
+  }
+}
