@@ -1,0 +1,88 @@
+<div class="row gx-4">
+
+  <%# ── Left sidebar ──────────────────────────────────────────────────────── %>
+  <%= render "quests/sidebar", active_link: :index %>
+
+  <%# ── Main content ───────────────────────────────────────────────────────── %>
+  <main class="col-12 col-md-9 col-lg-10" id="main-content">
+
+    <%# Info / summary container %>
+    <div class="index-info-container mb-4 p-4 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+      <div>
+        <h1 class="index-info-container__title mb-1">Open Quests</h1>
+        <p class="index-info-container__subtitle mb-0">
+          <span class="fw-semibold"><%= @quests.count %></span>
+          <%= @quests.count == 1 ? "quest" : "quests" %> available in your community
+        </p>
+      </div>
+      <% if giver_signed_in? || accepter_signed_in? %>
+        <%= link_to new_quest_path, class: "btn btn-mustard btn-lg flex-shrink-0 d-md-none", aria: { label: "Post a new quest" } do %>
+          <i class="fa-solid fa-circle-plus me-2" aria-hidden="true"></i>Post a Quest
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# Quest list %>
+    <% if @quests.any? %>
+      <ul class="quest-list list-unstyled mb-0" aria-label="Quest listings">
+        <% @quests.each do |quest| %>
+          <li class="quest-card">
+            <%= link_to quest_path(quest), class: "quest-card__link", aria: { label: "View quest: #{quest.title}" } do %>
+
+              <div class="quest-card__body">
+                <%# Status badge + category %>
+                <div class="quest-card__meta d-flex align-items-center gap-2 mb-1">
+                  <span class="quest-card__status quest-card__status--<%= quest.status %>" role="status">
+                    <%= quest.status.humanize %>
+                  </span>
+                  <% if quest.category.present? %>
+                    <span class="quest-card__category text-muted">
+                      <i class="fa-solid fa-tag me-1" aria-hidden="true"></i><%= quest.category.humanize %>
+                    </span>
+                  <% end %>
+                </div>
+
+                <%# Title + description %>
+                <h2 class="quest-card__title"><%= quest.title %></h2>
+                <% if quest.description.present? %>
+                  <p class="quest-card__description text-muted mb-0"><%= truncate(quest.description, length: 120) %></p>
+                <% end %>
+
+                <%# Location + due date %>
+                <div class="quest-card__details d-flex flex-wrap gap-3 mt-2">
+                  <% if quest.suburb.present? %>
+                    <span class="quest-card__detail">
+                      <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= quest.suburb %>
+                    </span>
+                  <% end %>
+                  <% if quest.expires_at.present? %>
+                    <span class="quest-card__detail">
+                      <i class="fa-regular fa-calendar me-1" aria-hidden="true"></i><%= quest.expires_at.strftime("%b %-d, %Y") %>
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+
+              <%# Reward badge %>
+              <div class="quest-card__reward-wrap flex-shrink-0 text-center" aria-label="Reward: <%= number_to_currency(quest.reward_amount, unit: '¥', precision: 0, format: '%u%n') %>">
+                <span class="quest-card__reward-amount"><%= number_with_delimiter(quest.reward_amount) %></span>
+                <span class="quest-card__reward-unit">¥</span>
+              </div>
+
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="quest-empty text-center py-5">
+        <div class="quest-empty__icon mb-3" aria-hidden="true">
+          <i class="fa-solid fa-scroll"></i>
+        </div>
+        <h2 class="quest-empty__heading">No quests yet</h2>
+        <p class="quest-empty__body text-muted">Be the first to post a quest for your community.</p>
+        <%= link_to "Post a Quest", new_quest_path, class: "btn btn-mustard btn-lg mt-2" %>
+      </div>
+    <% end %>
+
+  </main>
+</div>
