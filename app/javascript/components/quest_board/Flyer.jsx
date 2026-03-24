@@ -92,9 +92,9 @@ function Flyer({ quest, index, slot, onMouseEnter, stack, onClick, zoom }) {
         {showBurn && burns[burnVariant]}
         <h3>{quest.title}</h3>
         <span>{quest.description}</span>
-        <span>{quest.reward_amount}{quest.reward_type}</span>
+        <div className="flyer__reward">¥{Math.round(quest.reward_amount).toLocaleString()}</div>
         <div>
-          {quest.id === zoom && <button>Accept Quest</button>}
+          {quest.id === zoom && <button className="btn btn-mustard w-100 mt-2">Accept Quest</button>}
         </div>
       </motion.div>
     </motion.div>
