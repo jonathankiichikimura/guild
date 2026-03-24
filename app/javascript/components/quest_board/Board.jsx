@@ -29,7 +29,7 @@ function Board({ quests }) {
     <div className="board-frame">
       <div className="title-sign">
         <div className="title-sign__chain"></div>
-        <span><i class="fa-solid fa-khanda"></i> Guild Quests <i class="fa-solid fa-khanda"></i></span>
+        <span><i className="fa-solid fa-khanda"></i> Guild Quests <i className="fa-solid fa-khanda"></i></span>
       </div>
       <div className="board-frame__corner board-frame__corner--tl"></div>
       <div className="board-frame__corner board-frame__corner--tr"></div>
