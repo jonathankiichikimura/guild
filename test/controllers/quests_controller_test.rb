@@ -43,18 +43,49 @@ class QuestsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match @other_quest.title, response.body
   end
 
-  test "accepter index only shows open quests in their ward" do
+  test "accepter index renders React mount point" do
     sign_in @accepter
     get quests_url
-    assert_match @quest.title, response.body
-    assert_no_match @different_suburb_quest.title, response.body
+    assert_select "div#root[data-quests]"
   end
 
-  test "accepter index does not show non-open quests in their ward" do
+  test "accepter index does not render legacy quest list markup" do
+    sign_in @accepter
+    get quests_url
+    assert_select "ul.quest-list", count: 0
+  end
+
+  test "accepter index data-quests only contains open quests in their ward" do
+    sign_in @accepter
+    get quests_url
+    assert_select "div#root[data-quests]" do |elements|
+      quests = JSON.parse(elements.first["data-quests"])
+      titles = quests.map { |q| q["title"] }
+      assert_includes titles, @quest.title
+      assert_not_includes titles, @different_suburb_quest.title
+    end
+  end
+
+  test "accepter index data-quests excludes non-open quests" do
     @quest.update!(status: "in_progress")
     sign_in @accepter
     get quests_url
-    assert_no_match @quest.title, response.body
+    assert_select "div#root[data-quests]" do |elements|
+      quests = JSON.parse(elements.first["data-quests"])
+      titles = quests.map { |q| q["title"] }
+      assert_not_includes titles, @quest.title
+    end
+  end
+
+  test "accepter index data-quests only exposes whitelisted fields" do
+    sign_in @accepter
+    get quests_url
+    assert_select "div#root[data-quests]" do |elements|
+      quests = JSON.parse(elements.first["data-quests"])
+      quests.each do |q|
+        assert_equal %w[id title description reward_amount suburb].sort, q.keys.sort
+      end
+    end
   end
 
   test "should redirect landing page when signed out" do
