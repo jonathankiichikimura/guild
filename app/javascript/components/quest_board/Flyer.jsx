@@ -2,6 +2,11 @@ import React from 'react'
 import { motion } from "framer-motion"
 
 function Flyer({ quest, index, slot, onMouseEnter, stack, onClick, zoom }) {
+  const amount = Number(quest.reward_amount)
+  const rewardDisplay = quest.reward_amount != null && !isNaN(amount)
+    ? `¥${Math.round(amount).toLocaleString()}`
+    : '—'
+
   const burnVariant = index % 4
   const showBurn = index % 8 < 4
   const burns = [
@@ -92,7 +97,8 @@ function Flyer({ quest, index, slot, onMouseEnter, stack, onClick, zoom }) {
         {showBurn && burns[burnVariant]}
         <h3>{quest.title}</h3>
         <span>{quest.description}</span>
-        <div className="flyer__reward">¥{Math.round(quest.reward_amount).toLocaleString()}</div>
+        {quest.suburb && <div className="flyer__suburb">{quest.suburb}</div>}
+        <div className="flyer__reward">{rewardDisplay}</div>
         <div>
           {quest.id === zoom && <button className="btn btn-mustard w-100 mt-2">Accept Quest</button>}
         </div>

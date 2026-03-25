@@ -1,7 +1,10 @@
 <% content_for :title, "Quests — Guild" %>
 
 <% if accepter_signed_in? %>
-  <div id="root" data-quests="<%= @quests.to_json %>"></div>
+  <% content_for :js_bundles do %>
+    <%= javascript_include_tag "quest_board", "data-turbo-track": "reload", defer: true %>
+  <% end %>
+  <div id="root" data-quests="<%= @quests.as_json(only: [:id, :title, :description, :reward_amount, :suburb]).to_json %>"></div>
 
 <% else %>
   <div class="quests-page container-fluid py-4 px-4 px-md-5">
